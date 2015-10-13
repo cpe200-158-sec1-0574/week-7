@@ -14,7 +14,7 @@ namespace twozerofoureight
     {
         Model model;
         Controller controller;
-       
+        ShowScore scoreView;
         public TwoZeroFourEightView()
         {
             InitializeComponent();
@@ -23,11 +23,14 @@ namespace twozerofoureight
             controller = new TwoZeroFourEightController();
             controller.AddModel(model);
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
+            scoreView = new ShowScore(model);
+            scoreView.Visible = true;
+            scoreView.Enabled = true; 
         }
 
         public void Notify(Model m)
         {
-            UpdateBoard(((TwoZeroFourEightModel) m).GetBoard());
+            UpdateBoard(((TwoZeroFourEightModel)m).GetBoard(), ((TwoZeroFourEightModel)m).getScore());
         }
 
         private void UpdateTile(Label l, int i)
@@ -57,7 +60,7 @@ namespace twozerofoureight
                     break;
             }
         }
-        private void UpdateBoard(int[,] board)
+        private void UpdateBoard(int[,] board, int score)
         {
             UpdateTile(lbl00,board[0, 0]);
             UpdateTile(lbl01,board[0, 1]);
@@ -75,8 +78,8 @@ namespace twozerofoureight
             UpdateTile(lbl31,board[3, 1]);
             UpdateTile(lbl32,board[3, 2]);
             UpdateTile(lbl33,board[3, 3]);
+            UpdateTile(lblScore, score);
         }
-
         private void btnLeft_Click(object sender, EventArgs e)
         {
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
@@ -97,5 +100,24 @@ namespace twozerofoureight
             controller.ActionPerformed(TwoZeroFourEightController.DOWN);
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void TwoZeroFourEightView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
